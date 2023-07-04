@@ -1,0 +1,4 @@
+{
+  "table": "./packages/table/index.js",
+  "table-column": "./packages/table-column/index.js"
+}
