@@ -64,6 +64,18 @@ export const cellForced = {
     },
     sortable: false
   },
+  'row-number': {
+    renderHeader: function(h, { column }) {
+      return column.label || '#';
+    },
+    renderCell: function(h, { $index, store }) {
+      const { perPage, currentPage } = store.states;
+      const rowNumber = perPage * currentPage + $index + 1 - perPage;
+
+      return <div>{ rowNumber }</div>;
+    },
+    sortable: false
+  },
   expand: {
     renderHeader: function(h, { column }) {
       return column.label || '';

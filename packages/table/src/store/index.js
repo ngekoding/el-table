@@ -113,6 +113,15 @@ Watcher.prototype.mutations = {
     this.updateTableScrollY();
   },
 
+  searchChange(states, keyword) {
+    this.updateSearchKeyword(keyword);
+    this.execQuery();
+
+    this.table.$emit('search-change', states.searchKeyword);
+
+    this.updateTableScrollY();
+  },
+
   toggleAllSelection() {
     this.toggleAllSelection();
   },

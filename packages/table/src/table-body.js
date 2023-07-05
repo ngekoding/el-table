@@ -28,11 +28,12 @@ export default {
     rowClassName: [String, Function],
     rowStyle: [Object, Function],
     fixed: String,
-    highlight: Boolean
+    highlight: Boolean,
+    paginate: Boolean
   },
 
   render(h) {
-    const data = this.data || [];
+    const data = this.dataPaginated;
     return (
       <table
         class="el-table__body"
@@ -63,6 +64,8 @@ export default {
 
     ...mapStates({
       data: 'data',
+      perPage: 'perPage',
+      currentPage: 'currentPage',
       columns: 'columns',
       treeIndent: 'indent',
       leftFixedLeafCount: 'fixedLeafColumnsLength',
@@ -79,6 +82,15 @@ export default {
 
     firstDefaultColumnIndex() {
       return arrayFindIndex(this.columns, ({ type }) => type === 'default');
+    },
+
+    dataPaginated() {
+      const data = this.data || [];
+
+      if (!this.paginate) return data;
+
+      const offset = this.currentPage * this.perPage - this.perPage;
+      return data.slice(offset, offset + this.perPage);
     }
   },
 

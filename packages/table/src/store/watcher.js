@@ -67,7 +67,13 @@ export default Vue.extend({
         sortProp: null,
         sortOrder: null,
 
-        hoverRow: null
+        hoverRow: null,
+
+        searchKeyword: '',
+        searchColumns: [],
+
+        perPage: 10,
+        currentPage: 1
       }
     };
   },
@@ -273,6 +279,14 @@ export default Vue.extend({
       this.states.sortOrder = order;
     },
 
+    updateSearchKeyword(keyword) {
+      this.states.searchKeyword = keyword;
+    },
+
+    updateSearchColumns(columns) {
+      this.states.searchColumns = columns;
+    },
+
     execFilter() {
       const states = this.states;
       const { _data, filters } = states;
@@ -290,11 +304,34 @@ export default Vue.extend({
       });
 
       states.filteredData = data;
+
+      // We need original filtered data before searching
+      this.execSearch();
     },
 
     execSort() {
       const states = this.states;
       states.data = sortData(states.filteredData, states);
+    },
+
+    execSearch() {
+      const states = this.states;
+
+      if (states.searchKeyword.length === 0) return;
+
+      let searchColumns = states.searchColumns;
+      if (searchColumns.length === 0 && states.data.length > 0) {
+        searchColumns = Object.keys(states.data[0]);
+      }
+
+      states.filteredData = states.filteredData.filter(d => {
+        return searchColumns.some(column => {
+          return d[column]
+            .toString()
+            .toLowerCase()
+            .includes(states.searchKeyword.toLowerCase());
+        });
+      });
     },
 
     // 根据 filters 与 sort 去过滤 data
@@ -376,6 +413,14 @@ export default Vue.extend({
       } else {
         this.toggleTreeExpansion(row, expanded);
       }
+    },
+
+    updatePerPage(value) {
+      this.states.perPage = value;
+    },
+
+    updateCurrentPage(value) {
+      this.states.currentPage = value;
     }
   }
 });
