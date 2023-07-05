@@ -229,7 +229,7 @@
   let tableIdSeed = 1;
 
   export default {
-    name: 'ElTable',
+    name: 'IElTable',
 
     mixins: [Locale, Migrating],
 

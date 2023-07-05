@@ -5,7 +5,7 @@ import ElCheckbox from 'element-ui/lib/checkbox';
 let columnIdSeed = 1;
 
 export default {
-  name: 'ElTableColumn',
+  name: 'IElTableColumn',
 
   props: {
     type: {
