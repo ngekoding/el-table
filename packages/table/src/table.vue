@@ -214,7 +214,7 @@
         }"></div>
       <div class="el-table__column-resize-proxy" ref="resizeProxy" v-show="resizeProxyVisible"></div>
     </div>
-    <div v-if="paginate" class="page-options">
+    <div v-if="paginate" class="page-options" :class="{ 'extra-space': pageOptionsSpace }">
       <el-select
         v-model="paging.perPage"
         size="small"
@@ -390,7 +390,9 @@
         validator(value) {
           return value >= 0;
         }
-      }
+      },
+
+      pageOptionsSpace: Boolean
     },
 
     components: {
@@ -802,10 +804,19 @@
 </script>
 
 <style>
+.improved-el-table {
+  width: 100%;
+}
 .improved-el-table .page-options {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  padding-top: 15px;
+}
+.improved-el-table .page-options.extra-space {
+  padding: 15px 20px;
+}
+.improved-el-table .page-options .el-pagination {
+  padding: 0;
 }
 .improved-el-table .page-options .per-page-options {
   width: 75px;
