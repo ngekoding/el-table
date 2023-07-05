@@ -3,7 +3,8 @@ var nodeExternals = require('webpack-node-externals');
 
 var externals = [
   { vue: 'vue' },
-  nodeExternals()
+  nodeExternals(),
+  /^element-ui/
 ];
 
 exports.externals = externals;

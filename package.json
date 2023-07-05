@@ -2,6 +2,9 @@
   "name": "@ngekoding/el-table",
   "version": "0.0.0",
   "description": "Improved ElementUI table component with search, pagination and more.",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/el-table.common.js",
   "files": [
     "lib",
@@ -19,7 +22,9 @@
     "dist": "npm run clean && npm run build:file && npm run lint && webpack --config build/webpack.conf.js && webpack --config build/webpack.common.js && webpack --config build/webpack.component.js",
     "lint": "eslint src/**/* test/**/* packages/**/* build/**/* --quiet",
     "test": "npm run lint && cross-env CI_ENV=/dev/ BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "test:watch": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js"
+    "test:watch": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
+    "prepublishOnly": "npm run dist",
+    "release": "bumpp && npm publish"
   },
   "repository": {
     "type": "git",
@@ -39,6 +44,7 @@
   "dependencies": {
     "async-validator": "~1.8.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
+    "bump": "^0.2.5",
     "deepmerge": "^1.2.0",
     "normalize-wheel": "^1.0.1",
     "resize-observer-polyfill": "^1.5.0",
