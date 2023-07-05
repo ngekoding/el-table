@@ -61,6 +61,10 @@ module.exports = {
             preserveWhitespace: false
           }
         }
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'vue-style-loader', 'css-loader']
       }
     ]
   },
