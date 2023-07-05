@@ -23,7 +23,7 @@
     "lint": "eslint src/**/* test/**/* packages/**/* build/**/* --quiet",
     "test": "npm run lint && cross-env CI_ENV=/dev/ BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test:watch": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
-    "prepublishOnly": "npm run dist",
+    "prepublishOnly": "yarn run dist",
     "release": "bumpp && npm publish"
   },
   "repository": {
