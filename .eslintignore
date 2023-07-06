@@ -1,6 +1,7 @@
 *.sh
 node_modules
 lib
+src/index.js
 coverage
 *.md
 *.scss
