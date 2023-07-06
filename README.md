@@ -41,6 +41,33 @@ Vue.component(IElTableColumn.name, IElTableColumn)
 
 Note: you are still need to import the style from `element-ui`, continue reading for example.
 
+or for the easiest way, you can use [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components) to auto import the component with it's style:
+
+- Install `unplugin-vue-components`
+
+```sh
+npm i unplugin-vue-components -D
+```
+
+You can found the detail about this awesome package from the link above.
+
+- Change vite config (check the docs for Webpack, etc...)
+
+```js
+// vite.config.js
+import Components from 'unplugin-vue-components/vite'
+import { ElementUiResolver } from 'unplugin-vue-components/resolvers'
+import ImprovedElTableResolver from '@ngekoding/el-table/lib/resolver'
+
+// your plugin installation
+Components({
+  resolvers: [
+    ElementUiResolver(),
+    ImprovedElTableResolver(),
+  ],
+})
+```
+
 ## Usage
 
 Here's a simple example on how to use the component.
