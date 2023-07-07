@@ -28,13 +28,13 @@ export default {
     <i-el-table
       :data="dataNested"
       :search-keyword="keyword"
-      :search-columns="['name', 'contact.address', 'contact.email']"
+      :search-columns="['name', 'contact.address', 'contact.phone']"
       :search-delay="250"
     >
       <i-el-table-column type="row-number" label="#" width="50" />
       <i-el-table-column prop="name" label="Name" sortable />
       <i-el-table-column prop="contact.address" label="Address" />
-      <i-el-table-column prop="contact.email" label="Email" />
+      <i-el-table-column prop="contact.email" searchable label="Email" />
       <i-el-table-column prop="contact.phone" label="Phone" />
     </i-el-table>
   </div>
