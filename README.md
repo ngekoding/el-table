@@ -150,7 +150,7 @@ You can use all the original [element-ui table component](https://element.eleme.
 |--|--|--|--|
 | paginate | Enable or disable pagination feature. | boolean | true |
 | search-keyword | The keyword to search/filter in the data. | string | — |
-| search-columns | The property of the data to search for. | array | All the data property |
+| search-columns | The property of the data to search for. | array | All the first data property |
 | search-delay | The delay time in milliseconds for `search-keyword` before running (debounce delay). | number | 500 |
 | page-options-space | Add extra space for page options, useful when working with full table width in card/tabs. | boolean | false |
 

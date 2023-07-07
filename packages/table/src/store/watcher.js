@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import merge from 'element-ui/lib/utils/merge';
-import { getPropByPath } from 'element-ui/lib/utils/util';
+import { getValueByPath } from 'element-ui/lib/utils/util';
 import { getKeysMap, getRowIdentity, getColumnById, getColumnByKey, orderBy, toggleRowStatus } from '../util';
+import { flattie } from 'flattie';
 import expand from './expand';
 import current from './current';
 import tree from './tree';
@@ -317,21 +318,20 @@ export default Vue.extend({
 
     execSearch() {
       const states = this.states;
+      let { searchKeyword, searchColumns, _data } = states;
 
-      if (states.searchKeyword.length === 0) return;
-
-      let searchColumns = states.searchColumns;
-      if (searchColumns.length === 0 && states.data.length > 0) {
-        searchColumns = Object.keys(states.data[0]);
+      if (searchKeyword.length === 0) return;
+      if (searchColumns.length === 0 && _data.length > 0) {
+        searchColumns = Object.keys(flattie(_data[0], '.', true));
       }
 
       states.filteredData = states.filteredData.filter(d => {
         return searchColumns.some(column => {
-          const value = getPropByPath(d, column).v;
+          const value = getValueByPath(d, column);
           return value
             ? value.toString()
               .toLowerCase()
-              .includes(states.searchKeyword.toLowerCase())
+              .includes(searchKeyword.toLowerCase())
             : false;
         });
       });
