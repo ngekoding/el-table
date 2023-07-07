@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import merge from 'element-ui/lib/utils/merge';
+import { getPropByPath } from 'element-ui/lib/utils/util';
 import { getKeysMap, getRowIdentity, getColumnById, getColumnByKey, orderBy, toggleRowStatus } from '../util';
 import expand from './expand';
 import current from './current';
@@ -326,10 +327,12 @@ export default Vue.extend({
 
       states.filteredData = states.filteredData.filter(d => {
         return searchColumns.some(column => {
-          return d[column]
-            .toString()
-            .toLowerCase()
-            .includes(states.searchKeyword.toLowerCase());
+          const value = getPropByPath(d, column).v;
+          return value
+            ? value.toString()
+              .toLowerCase()
+              .includes(states.searchKeyword.toLowerCase())
+            : false;
         });
       });
     },
