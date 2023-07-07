@@ -39,7 +39,7 @@ Vue.component(IElTable.name, IElTable)
 Vue.component(IElTableColumn.name, IElTableColumn)
 ```
 
-Note: you are still need to import the style from `element-ui`, continue reading for example.
+Note: you are still need to register `element-ui` and import the style, continue reading for complete example.
 
 or for the easiest way, you can use [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components) to auto import the component with it's style:
 
@@ -73,24 +73,15 @@ Components({
 Here's a simple example on how to use the component.
 
 ```vue
-// App.vue
 <script>
-import { Input as ElInput } from 'element-ui'
+import Vue from 'vue'
+import ElementUI from 'element-ui'
+import ImprovedElTable from '@ngekoding/el-table'
 
-// Import the index.css for simply use
-// import 'element-ui/lib/theme-chalk/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
 
-// Or import specific required style only
-import 'element-ui/packages/theme-chalk/lib/base.css'
-import 'element-ui/packages/theme-chalk/lib/loading.css'
-import 'element-ui/packages/theme-chalk/lib/table.css'
-import 'element-ui/packages/theme-chalk/lib/table-column.css'
-import 'element-ui/packages/theme-chalk/lib/select.css'
-import 'element-ui/packages/theme-chalk/lib/option.css'
-import 'element-ui/packages/theme-chalk/lib/pagination.css'
-
-// For this demo only
-import 'element-ui/packages/theme-chalk/lib/input.css'
+Vue.use(ElementUI)
+Vue.use(ImprovedElTable)
 
 export default {
   data() {
@@ -160,8 +151,8 @@ You can use all the original [element-ui table component](https://element.eleme.
 | paginate | Enable or disable pagination feature. | boolean | true |
 | search-keyword | The keyword to search/filter in the data. | string | — |
 | search-columns | The property of the data to search for. | array | All the data property |
-| search-delay | The delay time in milliseconds for `search-keyword` before running (debounce delay).  | number | 500 |
-| page-options-space | Add extra space for page options, useful when working with full table width in card/tabs.  | boolean | false |
+| search-delay | The delay time in milliseconds for `search-keyword` before running (debounce delay). | number | 500 |
+| page-options-space | Add extra space for page options, useful when working with full table width in card/tabs. | boolean | false |
 
 #### i-el-table-column props
 
