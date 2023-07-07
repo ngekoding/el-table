@@ -119,7 +119,7 @@ export default {
       <i-el-table-column prop="name" label="Name" sortable />
       <i-el-table-column prop="address" label="Address" />
       <i-el-table-column prop="email" label="Email" />
-      <i-el-table-column prop="phone" label="Phone" />
+      <i-el-table-column prop="phone" label="Phone" searchable />
     </i-el-table>
   </div>
 </template>
@@ -150,13 +150,16 @@ You can use all the original [element-ui table component](https://element.eleme.
 |--|--|--|--|
 | paginate | Enable or disable pagination feature. | boolean | true |
 | search-keyword | The keyword to search/filter in the data. | string | — |
-| search-columns | The property of the data to search for. | array | All the first data property |
+| search-columns | The property of the data to search for. Or you can define the table-column as `searchable`. | array | All the first data property |
 | search-delay | The delay time in milliseconds for `search-keyword` before running (debounce delay). | number | 500 |
 | page-options-space | Add extra space for page options, useful when working with full table width in card/tabs. | boolean | false |
 
 #### i-el-table-column props
 
-You can use `type="row-number"` to show the incremental number for each row.
+| Prop | Description |  Type | Default |
+|--|--|--|--|
+| type | Same as original, but with extra `row-number` to show the incremental number for each row. | string (selection/index/expand/row-number) | — |
+| searchable | Whether column can be searched, merged with `search-columns` on table props. Note that you need to define the column `prop` to make it work. | boolean | false |
 
 ## License
 
