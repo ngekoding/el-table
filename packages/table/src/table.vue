@@ -711,14 +711,17 @@
         this.store.updateCurrentPage(value);
       },
 
-      searchKeyword() {
-        if (!this.awaitingSearch) {
-          setTimeout(() => {
-            this.awaitingSearch = false;
-            this.store.commit('searchChange', this.searchKeyword);
-          }, this.searchDelay);
+      searchKeyword: {
+        immediate: true,
+        handler() {
+          if (!this.awaitingSearch) {
+            setTimeout(() => {
+              this.awaitingSearch = false;
+              this.store.commit('searchChange', this.searchKeyword);
+            }, this.searchDelay);
+          }
+          this.awaitingSearch = true;
         }
-        this.awaitingSearch = true;
       },
 
       searchColumns: {
