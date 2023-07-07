@@ -1,11 +1,13 @@
 <script>
 import dataDummy from './data-dummy';
+import dataDummyNested from './data-dummy-nested';
 
 export default {
   data() {
     return {
       keyword: '',
-      data: dataDummy
+      data: dataDummy,
+      dataNested: dataDummyNested
     };
   }
 };
@@ -24,16 +26,16 @@ export default {
       />
     </div>
     <i-el-table
-      :data="data"
+      :data="dataNested"
       :search-keyword="keyword"
-      :search-columns="['name', 'address', 'email']"
+      :search-columns="['name', 'contact.address', 'contact.email']"
       :search-delay="250"
     >
       <i-el-table-column type="row-number" label="#" width="50" />
       <i-el-table-column prop="name" label="Name" sortable />
-      <i-el-table-column prop="address" label="Address" />
-      <i-el-table-column prop="email" label="Email" />
-      <i-el-table-column prop="phone" label="Phone" />
+      <i-el-table-column prop="contact.address" label="Address" />
+      <i-el-table-column prop="contact.email" label="Email" />
+      <i-el-table-column prop="contact.phone" label="Phone" />
     </i-el-table>
   </div>
 </template>
