@@ -740,6 +740,7 @@
     mounted() {
       this.bindEvents();
       this.store.updateColumns();
+      this.store.updateSearchableColumns();
       this.doLayout();
 
       this.resizeState = {

@@ -2,7 +2,6 @@ import Vue from 'vue';
 import merge from 'element-ui/lib/utils/merge';
 import { getValueByPath } from 'element-ui/lib/utils/util';
 import { getKeysMap, getRowIdentity, getColumnById, getColumnByKey, orderBy, toggleRowStatus } from '../util';
-import { flattie } from 'flattie';
 import expand from './expand';
 import current from './current';
 import tree from './tree';
@@ -73,6 +72,9 @@ export default Vue.extend({
 
         searchKeyword: '',
         searchColumns: [],
+        searchableColumns: [],
+        _searchColumns: [],
+        _dataProperties: [],
 
         perPage: 10,
         currentPage: 1
@@ -287,6 +289,28 @@ export default Vue.extend({
 
     updateSearchColumns(columns) {
       this.states.searchColumns = columns;
+      this.resolveSearchColumns();
+    },
+
+    updateSearchableColumns() {
+      const { columns } = this.states;
+      this.states.searchableColumns = columns.reduce((result, column) => {
+        if (column.property && column.searchable) {
+          result.push(column.property);
+        }
+        return result;
+      }, []);
+      this.resolveSearchColumns();
+    },
+
+    resolveSearchColumns() {
+      const states = this.states;
+      const { searchColumns, searchableColumns, _dataProperties } = states;
+      const mergedSearchColumns = searchColumns
+        .concat(searchableColumns)
+        .filter((value, index, self) => self.indexOf(value) === index);
+      states._searchColumns = mergedSearchColumns.length ? mergedSearchColumns : _dataProperties;
+      this.execQuery();
     },
 
     execFilter() {
@@ -318,15 +342,12 @@ export default Vue.extend({
 
     execSearch() {
       const states = this.states;
-      let { searchKeyword, searchColumns, _data } = states;
+      const { searchKeyword, _searchColumns } = states;
 
       if (searchKeyword.length === 0) return;
-      if (searchColumns.length === 0 && _data.length > 0) {
-        searchColumns = Object.keys(flattie(_data[0], '.', true));
-      }
 
       states.filteredData = states.filteredData.filter(d => {
-        return searchColumns.some(column => {
+        return _searchColumns.some(column => {
           const value = getValueByPath(d, column);
           return value
             ? value.toString()

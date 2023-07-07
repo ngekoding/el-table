@@ -1,11 +1,17 @@
 import Vue from 'vue';
 import Watcher from './watcher';
 import { arrayFind } from 'element-ui/lib/utils/util';
+import { flattie } from 'flattie';
 
 Watcher.prototype.mutations = {
   setData(states, data) {
     const dataInstanceChanged = states._data !== data;
     states._data = data;
+    states._dataProperties = [];
+
+    if (data.length) {
+      states._dataProperties = Object.keys(flattie(data[0], '.', true));
+    }
 
     this.execQuery();
     // 数据变化，更新部分数据。

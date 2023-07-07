@@ -20,6 +20,7 @@ export default {
     width: {},
     minWidth: {},
     renderHeader: Function,
+    searchable: Boolean,
     sortable: {
       type: [Boolean, String],
       default: false
@@ -218,7 +219,7 @@ export default {
     },
 
     registerComplexWatchers() {
-      const props = ['fixed'];
+      const props = ['fixed', 'searchable'];
       const aliases = {
         realWidth: 'width',
         realMinWidth: 'minWidth'
@@ -235,6 +236,7 @@ export default {
           this.columnConfig[columnKey] = newVal;
           const updateColumns = columnKey === 'fixed';
           this.owner.store.scheduleLayout(updateColumns);
+          this.owner.store.updateSearchableColumns();
         });
       });
     }
@@ -274,6 +276,7 @@ export default {
       filterOpened: false,
       // sort 相关属性
       sortable: sortable,
+      searchable: this.searchable,
       // index 列
       index: this.index
     };
@@ -282,8 +285,9 @@ export default {
     const sortProps = ['sortMethod', 'sortBy', 'sortOrders'];
     const selectProps = ['selectable', 'reserveSelection'];
     const filterProps = ['filterMethod', 'filters', 'filterMultiple', 'filterOpened', 'filteredValue', 'filterPlacement'];
+    const searchProps = ['searchable'];
 
-    let column = this.getPropsData(basicProps, sortProps, selectProps, filterProps);
+    let column = this.getPropsData(basicProps, sortProps, selectProps, filterProps, searchProps);
     column = mergeOptions(defaults, column);
 
     // 注意 compose 中函数执行的顺序是从右到左
