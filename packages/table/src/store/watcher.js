@@ -303,14 +303,14 @@ export default Vue.extend({
       this.resolveSearchColumns();
     },
 
-    resolveSearchColumns() {
+    resolveSearchColumns(options = { execQuery: true }) {
       const states = this.states;
       const { searchColumns, searchableColumns, _dataProperties } = states;
       const mergedSearchColumns = searchColumns
         .concat(searchableColumns)
         .filter((value, index, self) => self.indexOf(value) === index);
       states._searchColumns = mergedSearchColumns.length ? mergedSearchColumns : _dataProperties;
-      this.execQuery();
+      if (options.execQuery) this.execQuery();
     },
 
     execFilter() {

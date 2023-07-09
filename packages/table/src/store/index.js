@@ -11,6 +11,9 @@ Watcher.prototype.mutations = {
 
     if (data.length) {
       states._dataProperties = Object.keys(flattie(data[0], '.', true));
+      if (!states.searchColumns.length && !states.searchableColumns.length) {
+        this.resolveSearchColumns({ execQuery: false });
+      }
     }
 
     this.execQuery();
