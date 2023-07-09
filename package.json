@@ -10,8 +10,7 @@
     "lib",
     "src",
     "packages",
-    "types",
-    "screenshots"
+    "types"
   ],
   "typings": "types/index.d.ts",
   "scripts": {
