@@ -1,6 +1,6 @@
 {
   "name": "@ngekoding/el-table",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Improved ElementUI table component with search, pagination and more.",
   "publishConfig": {
     "access": "public"
