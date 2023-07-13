@@ -8,16 +8,33 @@ function getSideEffects(partialName, options) {
 
   if (!importStyle) {return;};
 
+  // Required other components styles
+  const requiredOtherStyles = [
+    'pagination',
+    'checkbox',
+    'checkbox-group',
+    'select',
+    'option',
+    'tooltip',
+    'scrollbar'
+  ];
+
   if (importStyle === 'sass') {
+    const extraStyles = requiredOtherStyles.map(item => {
+      return `element-ui/packages/theme-chalk/src/${item}.scss`;
+    });
     return [
       'element-ui/packages/theme-chalk/src/base.scss',
       `element-ui/packages/theme-chalk/src/${partialName}.scss`
-    ];
+    ].concat(extraStyles);
   } else {
+    const extraStyles = requiredOtherStyles.map(item => {
+      return `element-ui/lib/theme-chalk/${item}.css`;
+    });
     return [
       'element-ui/lib/theme-chalk/base.css',
       `element-ui/lib/theme-chalk/${partialName}.css`
-    ];
+    ].concat(extraStyles);
   }
 }
 
