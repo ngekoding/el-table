@@ -8,33 +8,19 @@ function getSideEffects(partialName, options) {
 
   if (!importStyle) {return;};
 
-  // Required other components styles
-  const requiredOtherStyles = [
+  const items = [
+    'base',
     'pagination',
-    'checkbox',
-    'checkbox-group',
     'select',
     'option',
-    'tooltip',
-    'scrollbar'
+    'scrollbar',
+    partialName
   ];
 
   if (importStyle === 'sass') {
-    const extraStyles = requiredOtherStyles.map(item => {
-      return `element-ui/packages/theme-chalk/src/${item}.scss`;
-    });
-    return [
-      'element-ui/packages/theme-chalk/src/base.scss',
-      `element-ui/packages/theme-chalk/src/${partialName}.scss`
-    ].concat(extraStyles);
+    return items.map(item => `element-ui/packages/theme-chalk/src/${item}.scss`);
   } else {
-    const extraStyles = requiredOtherStyles.map(item => {
-      return `element-ui/lib/theme-chalk/${item}.css`;
-    });
-    return [
-      'element-ui/lib/theme-chalk/base.css',
-      `element-ui/lib/theme-chalk/${partialName}.css`
-    ].concat(extraStyles);
+    return items.map(item => `element-ui/lib/theme-chalk/${item}.css`);
   }
 }
 
