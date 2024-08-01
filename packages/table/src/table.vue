@@ -374,6 +374,14 @@
         default: 1
       },
 
+      perPage: {
+        type: Number,
+        default: 10,
+        validator(value) {
+          return [10, 20, 30, 40, 50, 100].includes(value);
+        }
+      },
+
       searchKeyword: {
         type: String,
         default: ''
@@ -701,9 +709,12 @@
         }
       },
 
-      'paging.perPage'(value) {
-        this.$emit('update:perPage', value);
-        this.store.updatePerPage(value);
+      'paging.perPage': {
+        immediate: true,
+        handler(value) {
+          this.$emit('update:perPage', value);
+          this.store.updatePerPage(value);
+        }
       },
 
       'paging.currentPage': {
@@ -801,7 +812,7 @@
         scrollPosition: 'left',
         awaitingSearch: false,
         paging: {
-          perPage: 10,
+          perPage: this.perPage,
           perPageOptions: [10, 20, 30, 40, 50, 100],
           currentPage: this.currentPage
         }
