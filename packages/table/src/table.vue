@@ -702,13 +702,16 @@
       },
 
       'paging.perPage'(value) {
-        this.$emit('update:per-page', value);
+        this.$emit('update:perPage', value);
         this.store.updatePerPage(value);
       },
 
-      'paging.currentPage'(value) {
-        this.$emit('update:current-page', value);
-        this.store.updateCurrentPage(value);
+      'paging.currentPage': {
+        immediate: true,
+        handler(value) {
+          this.$emit('update:currentPage', value);
+          this.store.updateCurrentPage(value);
+        }
       },
 
       searchKeyword: {
