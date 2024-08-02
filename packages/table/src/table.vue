@@ -564,6 +564,10 @@
 
       toggleAllSelection() {
         this.store.commit('toggleAllSelection');
+      },
+
+      setCurrentPage(currentPage) {
+        this.paging.currentPage = currentPage;
       }
 
     },

@@ -114,7 +114,20 @@ export default {
           addClass(newRow, 'hover-row');
         }
       });
+    },
+
+    dataPaginated: {
+      immediate: true,
+      handler(newVal) {
+        // Reset current page when no paginated data available
+        if (newVal.length === 0 && this.currentPage > 1) {
+          this.$nextTick(() => {
+            this.table.setCurrentPage(1);
+          });
+        }
+      }
     }
+
   },
 
   data() {

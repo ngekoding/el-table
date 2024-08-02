@@ -37,7 +37,7 @@ export default {
       :current-page.sync="paging.currentPage"
       :per-page.sync="paging.perPage"
     >
-      <i-el-table-column type="row-number" label="#" width="10" />
+      <i-el-table-column type="row-number" label="#" width="50" />
       <i-el-table-column prop="name" label="Name" sortable />
       <i-el-table-column prop="contact.address" label="Address" />
       <i-el-table-column prop="contact.email" searchable label="Email" />
