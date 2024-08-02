@@ -146,20 +146,23 @@ You can use all the original [element-ui table component](https://element.eleme.
 
 
 #### i-el-table props
-| Prop | Description |  Type | Default |
-|--|--|--|--|
-| paginate | Enable or disable pagination feature. | boolean | true |
-| search-keyword | The keyword to search/filter in the data. | string | — |
-| search-columns | The property of the data to search for. Or you can define the table-column as `searchable`. | array | All the first data property |
-| search-delay | The delay time in milliseconds for `search-keyword` before running (debounce delay). | number | 500 |
-| page-options-space | Add extra space for page options, useful when working with full table width in card/tabs. | boolean | false |
+
+| Prop | Description | Type | Accepted Values | Default |
+|--|--|--|--|--|
+| paginate | Enable or disable pagination feature. | Boolean | — | true |
+| per-page | Number of rows to display per page. | Number | 10, 20, 30, 40, 50, 100 | 10 |
+| current-page | Initial page to be active. Defaults to 1 if the given page is not available. | Number | — | 1 |
+| search-keyword | Keyword for searching/filtering data. | String | — | — |
+| search-columns | Properties of the data to search in. You can also define the table-column as `searchable`. | Array | — | All properties of the first data object |
+| search-delay | Delay time in milliseconds before applying the `search-keyword` (debounce delay). | Number | — | 500 |
+| page-options-space | Add extra space for page options, useful when working with full-width tables in card/tabs. | Boolean | — | false |
 
 #### i-el-table-column props
 
-| Prop | Description |  Type | Default |
-|--|--|--|--|
-| type | Same as original, but with extra `row-number` to show the incremental number for each row. | string (selection/index/expand/row-number) | — |
-| searchable | Whether column can be searched, merged with `search-columns` on table props. Note that you need to define the column `prop` to make it work. | boolean | false |
+| Prop | Description | Type | Accepted Values | Default |
+|--|--|--|--|--|
+| type | Same as original, but with extra `row-number` to show the incremental number for each row. | String | selection/index/expand/row-number | — |
+| searchable | Whether column can be searched, merged with `search-columns` on table props. Note that you need to define the column `prop` to make it work. | Boolean | — | false |
 
 ## License
 
